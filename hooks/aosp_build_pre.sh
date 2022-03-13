@@ -43,6 +43,13 @@ patch_safetynet(){
   patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0005_init-set-properties-to-make-safetynet-pass.patch"
 }
 
+patch_hardened_malloc(){
+  rm -rf "${AOSP_BUILD_DIR}/external/hardened_malloc"
+  retry git clone --branch 12 https://github.com/GrapheneOS/hardened_malloc.git "${AOSP_BUILD_DIR}/external/hardened_malloc"
+  cd "${AOSP_BUILD_DIR}/bionic"
+  patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0006_use-hardened-malloc-from-GrapheneOS.patch"
+}
+
 # apply custom hosts file
 custom_hosts_file="https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
 echo "applying custom hosts file ${custom_hosts_file}"
@@ -66,4 +73,9 @@ fi
 # Patch Keystore to pass SafetyNet
 if [ "${SAFETYNET_BYPASS}" == "true" ]; then
   patch_safetynet
+fi
+
+# Patch Bionic libc to use hardened_malloc from GrapheneOS (kudos to @thestinger)
+if [ "${USE_HARDENED_MALLOC}" == "true" ]; then
+  patch_hardened_malloc
 fi
