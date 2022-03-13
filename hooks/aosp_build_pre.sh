@@ -33,14 +33,14 @@ patch_bitgapps(){
 
 patch_safetynet(){
  #cd "${AOSP_BUILD_DIR}/system/security/"
- #patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0003-keystore-Block-key-attestation-for-Google-Play-Servi.patch"
+ #patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0003_keystore-Block-key-attestation-for-Google-Play-Servi.patch"
 
   cd "${AOSP_BUILD_DIR}/frameworks/base/"
   rm -rf "${AOSP_BUILD_DIR}/frameworks/base/core/java/com/android/internal/gmscompat/"
-  patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0004-bypass-safetynet.patch"
+  patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0004_bypass-safetynet.patch"
 
   cd "${AOSP_BUILD_DIR}/system/core/"
-  patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0005-init-set-properties-to-make-safetynet-pass.patch"
+  patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0005_init-set-properties-to-make-safetynet-pass.patch"
 }
 
 # apply custom hosts file
