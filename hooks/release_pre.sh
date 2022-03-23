@@ -34,11 +34,11 @@ add_magisk(){
 
   # Copy magiskinit to the right location
   rm -f ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/init
-  cp magisk-latest/lib/armeabi-v7a/libmagiskinit.so ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/init
+  cp magisk-latest/lib/arm64-v8a/libmagiskinit.so ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/init
  
   # Rename libmagisk* to magisk* (main executable daemon) before compressing them
-  mv magisk-latest/lib/armeabi-v7a/libmagisk32.so magisk-latest/lib/armeabi-v7a/magisk32
-  mv magisk-latest/lib/armeabi-v7a/libmagisk64.so magisk-latest/lib/armeabi-v7a/magisk64
+  #mv magisk-latest/lib/armeabi-v7a/libmagisk32.so magisk-latest/lib/armeabi-v7a/magisk32
+  mv magisk-latest/lib/arm64-v8a/libmagisk64.so magisk-latest/lib/armeabi-v7a/magisk64
 
   # Compress magisk* (main executable daemon)
   ./magisk-latest/lib/x86/libmagiskboot.so compress=xz magisk-latest/lib/armeabi-v7a/magisk32 magisk-latest/lib/armeabi-v7a/magisk32.xz
