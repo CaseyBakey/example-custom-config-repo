@@ -47,7 +47,7 @@ patch_safetynet(){
 
 patch_hardened_malloc(){
   rm -rf "${AOSP_BUILD_DIR}/external/hardened_malloc"
-  retry git clone --branch 12 https://github.com/GrapheneOS/hardened_malloc.git "${AOSP_BUILD_DIR}/external/hardened_malloc"
+  retry git clone https://github.com/GrapheneOS/hardened_malloc.git "${AOSP_BUILD_DIR}/external/hardened_malloc"
   
   cd "${AOSP_BUILD_DIR}/bionic"
   patch -p1 --no-backup-if-mismatch < "${CUSTOM_DIR}/patches/0006_use-hardened-malloc-from-GrapheneOS.patch"
