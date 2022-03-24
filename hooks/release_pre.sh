@@ -37,16 +37,16 @@ add_magisk(){
   cp magisk-latest/lib/arm64-v8a/libmagiskinit.so ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/init
  
   # Rename libmagisk* to magisk* (main executable daemon) before compressing them
-  #mv magisk-latest/lib/armeabi-v7a/libmagisk32.so magisk-latest/lib/armeabi-v7a/magisk32
-  mv magisk-latest/lib/arm64-v8a/libmagisk64.so magisk-latest/lib/armeabi-v7a/magisk64
+  mv magisk-latest/lib/armeabi-v7a/libmagisk32.so magisk-latest/lib/armeabi-v7a/magisk32
+  mv magisk-latest/lib/arm64-v8a/libmagisk64.so magisk-latest/lib/arm64-v8a/magisk64
 
   # Compress magisk* (main executable daemon)
   ./magisk-latest/lib/x86/libmagiskboot.so compress=xz magisk-latest/lib/armeabi-v7a/magisk32 magisk-latest/lib/armeabi-v7a/magisk32.xz
-  ./magisk-latest/lib/x86/libmagiskboot.so compress=xz magisk-latest/lib/armeabi-v7a/magisk64 magisk-latest/lib/armeabi-v7a/magisk64.xz
+  ./magisk-latest/lib/x86/libmagiskboot.so compress=xz magisk-latest/lib/arm64-v8a/magisk64 magisk-latest/lib/arm64-v8a/magisk64.xz
 
   # Copy magisk* (main executable daemon) to the right location
   cp magisk-latest/lib/armeabi-v7a/magisk32.xz ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/overlay.d/sbin/
-  cp magisk-latest/lib/armeabi-v7a/magisk64.xz ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/overlay.d/sbin/
+  cp magisk-latest/lib/arm64-v8a/magisk64.xz ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/overlay.d/sbin/
 
   # Create Magisk config file. We want to keep dm-verity and encryption.
   cat <<EOF > ${AOSP_BUILD_DIR}/out/target/product/$DEVICE/obj/PACKAGING/target_files_intermediates/$DEVICE-target_files-$BUILD_NUMBER/BOOT/RAMDISK/.backup/.magisk
